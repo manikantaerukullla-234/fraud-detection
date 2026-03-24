@@ -10,8 +10,12 @@ st.markdown("Enter transaction details below to check if it's fraudulent.")
 
 @st.cache_resource
 def load_model():
-    with open("model.pkl", "rb") as f:
-        return pickle.load(f)
+    try:
+        with open("model.pkl", "rb") as f:
+            return pickle.load(f)
+    except Exception as e:
+        st.error(f"Exact Error: {e}")
+        return None
 
 try:
     model = load_model()
